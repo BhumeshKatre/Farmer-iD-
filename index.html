@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Farmer ID Card Generator</title>
+  <title>Farmer ID Card Generator - Professional</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -19,21 +19,20 @@
         <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)">
 
         <label>Full Name (English)</label>
-        <input type="text" id="in-name" placeholder="e.g. Tara Tekchand Katre" oninput="updateCard()">
+        <input type="text" id="in-name" placeholder="Tara Tekchand Katre" oninput="updateCard()">
 
         <label>पूर्ण नाव (मराठी)</label>
-        <input type="text" id="in-nameLocal" placeholder="उदा. तारा टेकचंद कटरे" oninput="updateCard()">
+        <input type="text" id="in-nameLocal" placeholder="तारा टेकचंद कटरे" oninput="updateCard()">
 
         <div class="row">
           <div><label>DOB</label><input type="text" id="in-dob" placeholder="01/01/1977" oninput="updateCard()"></div>
-          <div><label>Gender</label><input type="text" id="in-gender" placeholder="Female / Male"
-              oninput="updateCard()"></div>
+          <div><label>Gender</label><input type="text" id="in-gender" placeholder="Female" oninput="updateCard()"></div>
         </div>
 
         <label>Mobile Number</label>
         <input type="text" id="in-mobile" placeholder="8459729470" oninput="updateCard()">
 
-        <label>Aadhaar No (English Label)</label>
+        <label>Aadhaar No</label>
         <input type="text" id="in-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" oninput="updateCard()">
 
         <label style="color: #1b5e20; font-weight: bold;">Farmer ID (Enrollment No)</label>
@@ -43,18 +42,16 @@
       <h3>Land Records</h3>
       <div id="land-inputs">
         <div class="land-row">
-          <input type="text" placeholder="Village" class="l-vill" oninput="updateCard()">
-          <input type="text" placeholder="Surve No" class="l-sno" oninput="updateCard()">
-          <input type="number" step="0.0001" placeholder="Area" class="l-area" oninput="updateCard()">
+          <input type="text" placeholder="Village" class="l-vill area" oninput="updateCard()">
+          <input type="text" placeholder="Surve No" class="l-sno  area" oninput="updateCard()">
+          <input type="number" step="0.0001" placeholder="Area" class="l-area area" oninput="updateCard()">
         </div>
       </div>
       <button class="btn-add" onclick="addLandRow()">+ Add Land Row</button>
 
       <div style="display: flex; gap: 10px; margin-top: 10px;">
-        <button class="btn-download" onclick="downloadPDF()" style="flex: 1;">Download PDF</button>
-        <button class="btn-print" onclick="printCard()"
-          style="flex: 1; background: #5d4037; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Print
-          Now</button>
+        <button class="btn-download" onclick="downloadPDF()">Download PDF</button>
+        <button class="btn-print" onclick="printCard()" style="background: #5d4037;">Direct Print</button>
       </div>
     </div>
 
@@ -83,9 +80,7 @@
 
       <div id="cardBack" class="id-card">
         <div class="card-content back-side">
-          <div class="address-box">
-            <strong>Land Ownership Details:</strong>
-          </div>
+          <div class="land-header"><strong>Land Ownership Details:</strong></div>
           <table id="landTable">
             <thead>
               <tr>
