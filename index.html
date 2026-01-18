@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Farmer ID Card Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="editor-panel">
+      <h2>Farmer Registry Entry</h2>
+      <div class="input-group">
+        <label>Farmer Photo</label>
+        <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)">
+
+        <label>Full Name (English)</label>
+        <input type="text" id="in-name" placeholder="e.g. Tara Tekchand Katre" oninput="updateCard()">
+
+        <label>पूर्ण नाव (मराठी)</label>
+        <input type="text" id="in-nameLocal" placeholder="उदा. तारा टेकचंद कटरे" oninput="updateCard()">
+
+        <div class="row">
+          <div><label>DOB</label><input type="text" id="in-dob" placeholder="01/01/1977" oninput="updateCard()"></div>
+          <div><label>Gender</label><input type="text" id="in-gender" placeholder="Female / Male"
+              oninput="updateCard()"></div>
+        </div>
+
+        <label>Mobile Number</label>
+        <input type="text" id="in-mobile" placeholder="8459729470" oninput="updateCard()">
+
+        <label>Aadhaar No (English Label)</label>
+        <input type="text" id="in-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" oninput="updateCard()">
+
+        <label style="color: #1b5e20; font-weight: bold;">Farmer ID (Enrollment No)</label>
+        <input type="text" id="in-farmerId" placeholder="27_476_4045..." oninput="updateCard()">
+      </div>
+
+      <h3>Land Records</h3>
+      <div id="land-inputs">
+        <div class="land-row">
+          <input type="text" placeholder="Village" class="l-vill" oninput="updateCard()">
+          <input type="text" placeholder="Surve No" class="l-sno" oninput="updateCard()">
+          <input type="number" step="0.0001" placeholder="Area" class="l-area" oninput="updateCard()">
+        </div>
+      </div>
+      <button class="btn-add" onclick="addLandRow()">+ Add Land Row</button>
+
+      <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button class="btn-download" onclick="downloadPDF()" style="flex: 1;">Download PDF</button>
+        <button class="btn-print" onclick="printCard()"
+          style="flex: 1; background: #5d4037; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Print
+          Now</button>
+      </div>
+    </div>
+
+    <div class="preview-panel">
+      <div id="cardFront" class="id-card">
+        <div class="header-strip">Agri Farmer</div>
+        <div class="card-content">
+          <div class="photo-section"><img id="f-photo" src="https://via.placeholder.com/100"></div>
+          <div class="info-section">
+            <p><strong>Name:</strong> <span id="v-name">Tara Tekchand Katre</span></p>
+            <p><strong>नाव:</strong> <span id="v-nameLocal">तारा टेकचंद कटरे</span></p>
+            <p><strong>DOB:</strong> <span id="v-dob">01/01/1977</span></p>
+            <p><strong>Gender:</strong> <span id="v-gender">Female</span></p>
+            <p><strong>Mobile No:</strong> <span id="v-mobile">8459729470</span></p>
+            <p><strong>Aadhaar No:</strong> <span id="v-aadhaar">XXXX XXXX XXXX</span></p>
+          </div>
+          <div id="qrcode"></div>
+        </div>
+        <div class="id-footer">
+          <div class="footer-number" id="v-farmerIdDisplay">27_476_4045...</div>
+          <div class="footer-label">Farmer ID</div>
+        </div>
+        <div class="disclaimer">टीप : हे कार्ड शेतकऱ्याच्या वैयक्तिक माहितीसाठी असून, याला कोणतीही शासकीय मान्यता नाही.
+        </div>
+      </div>
+
+      <div id="cardBack" class="id-card">
+        <div class="card-content back-side">
+          <div class="address-box">
+            <strong>Land Ownership Details:</strong>
+          </div>
+          <table id="landTable">
+            <thead>
+              <tr>
+                <th>Village</th>
+                <th>Surve No</th>
+                <th>Area (Ha)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="total-area">Total Land: <span id="v-total">0.0000</span> Ha</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
