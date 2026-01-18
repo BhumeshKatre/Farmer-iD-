@@ -37,7 +37,7 @@ function updateCard() {
   document.getElementById('v-aadhaar').innerText = formattedAadhar || 'XXXX XXXX XXXX';
 
   // Farmer ID (Bottom Section - Big Font)
-  let fId = document.getElementById('in-farmerId').value || '27_476_4045_537703_005429';
+  let fId = document.getElementById('in-farmerId').value || '78674534128';
   document.getElementById('v-farmerIdDisplay').innerText = fId;
 
   // Land Table Calculation (Back Side)
