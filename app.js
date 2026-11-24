@@ -40,6 +40,8 @@ function updateCard() {
 }
 
 async function downloadPDF() {
+  const name =  document.getElementById('v-name').innerText = document.getElementById('in-name').value || 'Tara Tekchand Katre';
+  console.log('name', name );
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
   const opts = { scale: 4, useCORS: true, logging: false };
@@ -48,11 +50,11 @@ async function downloadPDF() {
   const canvasB = await html2canvas(document.getElementById('cardBack'), opts);
 
    const imgW = 85.6, imgH = 54, x = (210 - imgW) / 2;
-  doc.text("FRONT SIDE", x, 20);
+  doc.text("", x, 20);
   doc.addImage(canvasF.toDataURL('image/jpeg', 1.0), 'JPEG', x, 25, imgW, imgH);
-  doc.text("BACK SIDE", x, 95);
+  doc.text("", x, 95);
   doc.addImage(canvasB.toDataURL('image/jpeg', 1.0), 'JPEG', x, 100, imgW, imgH);
-  doc.save("Farmer_ID_Card.pdf");
+  doc.save("Farmer_ID_Card.pdf" + name );
 }
 
 async function printCard() {
