@@ -54,7 +54,7 @@ async function downloadPDF() {
   doc.addImage(canvasF.toDataURL('image/jpeg', 1.0), 'JPEG', x, 25, imgW, imgH);
   doc.text("", x, 95);
   doc.addImage(canvasB.toDataURL('image/jpeg', 1.0), 'JPEG', x, 100, imgW, imgH);
-  doc.save(name.trim().split(" ")[0]+ 'FarmerId');
+  doc.save(name.trim().split(" ")[0]+ '_FarmerId');
 }
 
 async function printCard() {
